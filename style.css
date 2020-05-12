@@ -78,3 +78,9 @@ img {
   font-size: 40px;
   color: #2f5876;
 }
+
+.md-edit-menu {
+  opacity: 0.4;
+  transition: opacity 0.2s ease-in-out;
+  border: none;
+}

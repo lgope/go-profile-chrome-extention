@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Profile Launcher</title>
+    <title>Go Profile</title>
 
     <!-- custom css -->
     <link rel="stylesheet" href="style.css">
@@ -23,16 +23,22 @@
 
 <body>
     <div class="logo-name">
-        <h5 class="logo">
-            <img class="logo-icon" src="images/traversy-logo.png" />Profile
-            Launcher
-            <span class="version">(1.0.0)</span>
-        </h5>
-        <div class="">
+        <h4 class="logo">
+            <img class="logo-icon" src="images/profil-logo.png" />Go Profile
+        </h4>
+        <div class="data-input-fields">
             <p>
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
                     aria-expanded="false" aria-controls="collapseExample">
                     Add Profile Link
+                </button>
+                <button class="btn btn-danger removeBtn" type="button" data-toggle="collapse"
+                    data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                    Remove Link
+                </button>
+                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExampleFooter"
+                    aria-expanded="false" aria-controls="collapseExampleFooter">
+                    V
                 </button>
             </p>
             <div class="inputFields collapse" id="collapseExample" data-toggle="inputFields">
@@ -58,25 +64,55 @@
                 <button type="button" class="btn btn-success saveBtn">Save changes</button>
             </div>
 
+
+
+            <div class="inputFields collapse" id="collapseExample1" data-toggle="inputFields">
+                <span class="name-list"></span>
+                <div class="input-group input-group-sm mb-3 remove-name-field">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Name </span>
+                    </div>
+                    <input type="text" class="form-control remove-field" aria-label="Small"
+                        aria-describedby="inputGroup-sizing-sm" placeholder="facebook" required>
+                </div>
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample1">
+                    Close
+                </button>
+                <button type="button" class="btn btn-success RemoveSaveBtn">Remove</button>
+            </div>
+
+            <div class="footerField">
+                <div class="footerFields collapse" id="collapseExampleFooter" data-toggle="footerFields">
+                    <span class="version txt-dark">1.0.0</span>
+                    &copy;
+                    2020
+                    Created With
+                    <i class="fa fa-heart" style="color:rgb(233, 13, 42) "></i>
+                    By
+                    <a class="url txt-info" href="https://lakshmandev.netlify.app/" target="_blank">
+                        Lakshman
+                    </a>
+                </div>
+            </div>
         </div>
+    </div>
 
 
     </div>
 
     <div class="modal-icons">
         <div class="flex-container">
+            <!-- <div class="flex">
+                <a class="url" href="https://www.traversymedia.com" target="_blank">
+                    <i class="icon-name fa fa-globe" style="color:rgb(122, 174, 233) "></i>
+                </a>
+            </div> -->
         </div>
         <!-- <div class="footerField">
-            <p>
-                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExampleFooter"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    ^
-                </button>
-            </p>
             <div class="footerFields collapse" id="collapseExampleFooter" data-toggle="footerFields">
+                <span class="version"> version: 1.0.0 </span>
                 Created With ❤ By Lakshman
             </div>
-
         </div> -->
     </div>
 
@@ -84,6 +120,7 @@
 
 
     <!-- bootstrap 4 -->
+    <script src="./app.js"></script>
     <script src="./popup.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
