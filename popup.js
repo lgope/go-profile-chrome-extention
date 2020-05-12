@@ -12,6 +12,12 @@ $(document).ready(function () {
     if (name == 'stackoverflow') {
       name = 'stack-overflow';
     }
+
+    if (name == 'messenger') {
+      name = 'facebook-messenger';
+    }
+
+
     names.push(name);
     urls.push(url);
 
@@ -27,6 +33,11 @@ $(document).ready(function () {
     if (name == 'stackoverflow') {
       name = 'stack-overflow';
     }
+
+    if (name == 'messenger') {
+      name = 'facebook-messenger';
+    }
+
 
     stored.push({ name: name, url: url });
 
@@ -50,12 +61,12 @@ $(document).ready(function () {
     if (localStorage.getItem('data') === null && name && url) {
       saveData(name, url);
       clearInputFields();
-      $('.flex-container').empty();
+      // $('.flex-container').empty();
       renderNewData();
     } else if (name && url) {
       saveNewData(name, url);
       clearInputFields();
-      $('.flex-container').empty();
+      // $('.flex-container').empty();
       renderNewData();
     } else alert('Enter All Fields Please. 🙂');
 
@@ -72,7 +83,7 @@ $(document).ready(function () {
     if (da.name !== undefined && da.url !== undefined) {
       $('.flex-container').append(`<div class="flex">
         <a href=${da.url} target="_blank">
-        <i class="fa fa-${da.name}" style="color:rgb(190, 96, 65)">
+        <i class="fa fa-${da.name}" style="color:rgb(190, 96, 65)" aria-hidden="true">
         </i>
         </a>
         </div>`);
@@ -115,6 +126,7 @@ $(document).ready(function () {
 
     localStorage.setItem('data', JSON.stringify(updateData));
 
+    $('.remove-field').val('')
     $('.flex-container').empty();
     renderData();
 
