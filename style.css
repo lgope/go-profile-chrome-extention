@@ -14,6 +14,8 @@ body {
 .logo-name {
   margin: 5px;
   padding: 5px 5px 0 5px;
+  font-size: medium;
+  color: #2f5876;
 }
 
 h5 {
@@ -32,7 +34,8 @@ a:visited {
 }
 
 img {
-  width: 30px;
+  padding: 2px;
+  width: 35px;
 }
 
 .modal-icons {
@@ -46,6 +49,7 @@ img {
 }
 
 .logo-icon {
+  width: 22px;
   vertical-align: text-bottom;
   margin-right: 10px;
 }
@@ -56,7 +60,7 @@ img {
 }
 
 .flex-container {
-  display: flex;
+  display: -webkit-box;
   justify-content: space-between;
   padding: 10px 5px;
   float: left;
@@ -67,20 +71,34 @@ img {
 .flex {
   opacity: 1;
   transition: opacity 0.2s ease-in-out;
-  width: 120px;
+  width: 50px;
 }
 
 .flex:hover {
+  cursor: pointer;
   opacity: 0.4;
 }
 
-.flex .fa {
+/* .flex .fa {
   font-size: 40px;
   color: #2f5876;
-}
+} */
 
 .md-edit-menu {
   opacity: 0.4;
   transition: opacity 0.2s ease-in-out;
   border: none;
+}
+
+.flex span {
+  visibility: hidden;
+}
+
+.flex:hover span {
+  color: #000000;
+  visibility: visible;
+}
+
+.info-btn {
+  opacity: 0.5;
 }
