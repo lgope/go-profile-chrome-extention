@@ -1,20 +1,9 @@
 $(document).ready(function () {
-  // $('#copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-
-  // window.onload = function () {
-  //   renderData();
-  // };
-
+  
   $(function () {
-    // $(".draggable").draggable({
-    //     axis: 'x',
-    //     cursor: 'grabbing'
-    // });
     $('.flex-container').sortable({
       cursor: 'grabbing',
-      axis: 'x',
       update: function () {
-
         let stored = [];
         $('.flex-container div').each(function () {
           let name = $(this).attr('name');
@@ -24,7 +13,7 @@ $(document).ready(function () {
 
           stored.push({ name, url });
 
-          console.log('stored', stored);          
+          console.log('stored', stored);
         });
         localStorage.setItem('data', JSON.stringify(stored));
         console.log(localStorage.getItem('data'));
@@ -32,13 +21,11 @@ $(document).ready(function () {
     });
   });
 
+  // get url domain for get website icon
   function getDomain(url) {
     return url.match(/:\/\/(.[^/]+)/)[1];
   }
 
-  // var sortedIDs = $( ".flex-container" ).sortable( "toArray" );
-
-  // console.log('sortedIDs', sortedIDs);
 
   let names = new Array();
   let urls = new Array();
@@ -59,10 +46,6 @@ $(document).ready(function () {
     stored.push({ name: name, url: url });
 
     localStorage.setItem('data', JSON.stringify(stored));
-
-    let result = JSON.parse(localStorage.getItem('data'));
-
-    // console.log('result');
   }
 
   function clearInputFields() {
@@ -79,12 +62,12 @@ $(document).ready(function () {
       saveData(name, url);
       clearInputFields();
       // $('.flex-container').empty();
-      // renderNewData();
+      renderNewData();
     } else if (name && url) {
       saveNewData(name, url);
       clearInputFields();
       // $('.flex-container').empty();
-      // renderNewData();
+      renderNewData();
     } else alert('Enter All Fields Please. 🙂');
 
     // for (var i = 0; i < localStorage.length; i++) {
@@ -112,24 +95,6 @@ $(document).ready(function () {
   // <img class='fa' src="https://www.google.com/s2/favicons?domain_url=${da.url}" alt=""/>
   // <i class="fa fa-${da.name}" style="color:rgb(190, 96, 65)" aria-hidden="true"></i>
 
-  function renderData() {
-    let allData = JSON.parse(localStorage.getItem('data'));
-    allData.map(d => {
-      console.log(d.name, d.url);
-      if (d.name !== undefined && d.url !== undefined) {
-        const url = getDomain(d.url);
-        $('.flex-container')
-          .append(`
-          <div class="flex draggable" name=${d.name} url=${d.   url}>
-            <a href=${d.url} target="_blank">
-              <img class='fa' src="http://www.google.com/s2/favicons?domain=${url}" alt=""/>
-              <span class="tooltiptext">${d.name}</span>
-            </a>
-        </div>
-        `);
-      }
-    });
-  }
   // <i class="fa fa-${d.name}" style="color:rgb(190, 96, 65)">
   // </i>
 
@@ -150,17 +115,41 @@ $(document).ready(function () {
     console.log('object1', oldData);
 
     const removeName = $('.remove-field').val().toLowerCase();
-    updateData = oldData.filter(el => el.name !== removeName);
+    if (!removeName) {
+      alert('Enter name Please. 🙂');
+    } else {
+      updateData = oldData.filter(el => el.name !== removeName);
 
-    localStorage.setItem('data', JSON.stringify(updateData));
+      localStorage.setItem('data', JSON.stringify(updateData));
 
-    $('.remove-field').val('');
-    $('.flex-container').empty();
-    // renderData();
+      $('.remove-field').val('');
 
-    console.log('object2', updateData);
+      $('.flex-container div').each(function () {
+        let name = $(this).attr('name');
+        if (name === removeName) {
+          $(this).remove();
+        }
+      });
+    }
   });
 
+  function renderData() {
+    let allData = JSON.parse(localStorage.getItem('data'));
+    allData.map(d => {
+      console.log(d.name, d.url);
+      if (d.name !== undefined && d.url !== undefined) {
+        const url = getDomain(d.url);
+        $('.flex-container').append(`
+          <div class="flex draggable" name=${d.name} url=${d.url}>
+            <a href=${d.url} target="_blank">
+              <img class='fa' src="http://www.google.com/s2/favicons?domain=${url}" alt=""/>
+              <span class="tooltiptext">${d.name}</span>
+            </a>
+        </div>
+        `);
+      }
+    });
+  }
   // $('.addBtn').click(function () {
   //   console.log($('.flex-container div').length % 3);
 

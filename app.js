@@ -3,9 +3,10 @@ function getDomain(url) {
 }
 
 let allData = JSON.parse(localStorage.getItem('data'));
+console.log(allData);
 if (allData) {
-  allData.map(d => {
-    console.log(d.name, d.url);
+  allData.map((d, key) => {
+    console.log(d.name, d.url, key);
     if (d.name !== undefined && d.url !== undefined) {
       const url = getDomain(d.url);
       $('.flex-container').append(`
