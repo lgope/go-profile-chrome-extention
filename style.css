@@ -34,8 +34,8 @@ a:visited {
 }
 
 img {
-  padding: 2px;
-  width: 35px;
+  padding: 10px 5px 0px 5px;
+  width: 30px;
 }
 
 .modal-icons {
@@ -49,14 +49,18 @@ img {
 }
 
 .logo-icon {
-  width: 22px;
+  width: 35px;
   vertical-align: text-bottom;
-  margin-right: 10px;
 }
 
 .version {
   color: #444;
   font-size: 12px;
+}
+
+.name-list {
+  max-width: 110px;
+  word-wrap: break-word;
 }
 
 .flex-container {
@@ -79,10 +83,10 @@ img {
   opacity: 0.4;
 }
 
-/* .flex .fa {
+.flex .fa {
   font-size: 40px;
   color: #2f5876;
-} */
+}
 
 .md-edit-menu {
   opacity: 0.4;
@@ -101,4 +105,20 @@ img {
 
 .info-btn {
   opacity: 0.5;
+}
+
+.flex-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  background-color: #ffffff;
+  padding: 5px;
+}
+.flex {
+  background-color: rgb(236, 227, 227);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+  padding: 2px;
+  margin: 2px;
+  font-size: 10px;
+  text-align: center;
 }
