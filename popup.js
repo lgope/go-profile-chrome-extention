@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  
   $(function () {
     $('.flex-container').sortable({
       cursor: 'grabbing',
@@ -25,7 +24,6 @@ $(document).ready(function () {
   function getDomain(url) {
     return url.match(/:\/\/(.[^/]+)/)[1];
   }
-
 
   let names = new Array();
   let urls = new Array();
@@ -83,13 +81,21 @@ $(document).ready(function () {
     if (da.name !== undefined && da.url !== undefined) {
       const url = getDomain(da.url);
       $('.flex-container').append(`
-      <div class="flex draggable" name=${da.name} url=${da.url}>
-          <a href=${da.url} target="_blank">
-            <img class='fa' src="http://www.google.com/s2/favicons?domain=${url}" alt=""/><br>
-            <span class="tooltiptext">${da.name}</span>
+      <div class="flex draggable" name="${da.name}" url="${da.url}">
+          <a href="${da.url}" target="_blank">
+            <img class="fa" src="http://www.google.com/s2/favicons?domain=${url}" alt="${da.name}"/><br>
           </a>
+          <span class="tooltiptext">${da.name}</span>
         </div>
         `);
+      // $(`
+      // <div class="flex draggable" name=${da.name} url=${da.url}>
+      //   <a href=${da.url} target="_blank">
+      //     <img class='fa' src="http://www.google.com/s2/favicons?domain=${url}" alt=""/><br>
+      //     <span class="tooltiptext">${da.name}</span>
+      //   </a>
+      // </div>
+      // `).appendTo('.flex-container');
     }
   }
   // <img class='fa' src="https://www.google.com/s2/favicons?domain_url=${da.url}" alt=""/>
@@ -100,6 +106,10 @@ $(document).ready(function () {
 
   // display all names
   $('.removeBtn').click(function () {
+    showWebNames();
+  });
+
+  function showWebNames() {
     $('.name-list').empty();
     let data = JSON.parse(localStorage.getItem('data'));
     data.map(d => {
@@ -107,7 +117,7 @@ $(document).ready(function () {
         $('.name-list').append(`${d.name},`);
       }
     });
-  });
+  }
 
   // remove link
   $('.RemoveSaveBtn').click(function () {
@@ -130,6 +140,8 @@ $(document).ready(function () {
           $(this).remove();
         }
       });
+
+      showWebNames();
     }
   });
 
@@ -140,11 +152,11 @@ $(document).ready(function () {
       if (d.name !== undefined && d.url !== undefined) {
         const url = getDomain(d.url);
         $('.flex-container').append(`
-          <div class="flex draggable" name=${d.name} url=${d.url}>
-            <a href=${d.url} target="_blank">
-              <img class='fa' src="http://www.google.com/s2/favicons?domain=${url}" alt=""/>
+          <div class="flex draggable" name="${d.name}" url="${d.url}">
+            <a href="${d.url}" target="_blank">
+              <img class="fa" src="http://www.google.com/s2/favicons?domain=${url}" alt="${d.name}"/>
+             </a>
               <span class="tooltiptext">${d.name}</span>
-            </a>
         </div>
         `);
       }
