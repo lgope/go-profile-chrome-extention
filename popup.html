@@ -22,15 +22,6 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
-
-    <!-- <script>
-        $(function () {
-            $(".draggable").draggable({
-                axis: 'x'
-            });
-        });
-    </script> -->
-
 </head>
 
 <body>
@@ -39,17 +30,14 @@
 
         <div class="logo-name">
             <h4 class="logo">
-                <img class="logo-icon" src="images/profil-logo.png" />Go Profile
+                <img class="logo-icon" src="images/profil-logo.png" />
+                <span class="app-name">Go Profile</span>
             </h4>
             <div class="data-input-fields">
                 <p>
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
                         aria-expanded="false" aria-controls="collapseExample">
                         Add Profile Link
-                    </button>
-                    <button class="btn btn-danger removeBtn" type="button" data-toggle="collapse"
-                        data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-                        Remove Link
                     </button>
                     <button class="btn btn-info info-btn" type="button" data-toggle="collapse"
                         data-target="#collapseExampleFooter" aria-expanded="false"
@@ -64,7 +52,7 @@
                             <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
                         </div>
                         <input type="text" class="form-control name-field" aria-label="Small"
-                            aria-describedby="inputGroup-sizing-sm" placeholder="facebook" required>
+                            aria-describedby="inputGroup-sizing-sm" placeholder="facebook" autofocus required>
 
                         <div class="input-group input-group-sm mt-1">
                             <div class="input-group-prepend">
@@ -79,24 +67,6 @@
                         Close
                     </button>
                     <button type="button" class="btn btn-success saveBtn">Save changes</button>
-                </div>
-
-
-
-                <div class="inputFields collapse" id="collapseExample1" data-toggle="inputFields">
-                    <span class="name-list"></span>
-                    <div class="input-group input-group-sm mb-3 remove-name-field">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Name </span>
-                        </div>
-                        <input type="text" class="form-control remove-field" aria-label="Small"
-                            aria-describedby="inputGroup-sizing-sm" placeholder="facebook" required>
-                    </div>
-                    <button class="btn btn-secondary" type="button" data-toggle="collapse"
-                        data-target="#collapseExample1">
-                        Close
-                    </button>
-                    <button type="button" class="btn btn-success RemoveSaveBtn">Remove</button>
                 </div>
 
                 <div class="footerField">
@@ -120,17 +90,11 @@
         <div class="modal-icons">
             <div class="flex-container">
                 <!-- <div class="flex">
-                <a class="url" href="https://www.traversymedia.com" target="_blank">
+                <a class="url" href="https://www.example.com" target="_blank">
                     <i class="icon-name fa fa-globe" style="color:rgb(122, 174, 233) "></i>
                 </a>
             </div> -->
             </div>
-            <!-- <div class="footerField">
-            <div class="footerFields collapse" id="collapseExampleFooter" data-toggle="footerFields">
-                <span class="version"> version: 1.0.0 </span>
-                Created With ❤ By Lakshman
-            </div>
-        </div> -->
         </div>
 
     </div>
