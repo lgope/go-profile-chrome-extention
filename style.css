@@ -7,7 +7,7 @@ body {
   margin: 0;
   min-height: 160px;
   padding: 0;
-  width: 364px;
+  width: 400px;
   /* border-top: 0.5px solid #201818; */
 }
 
@@ -16,6 +16,11 @@ body {
   padding: 5px 5px 0 5px;
   font-size: medium;
   color: #2f5876;
+}
+
+.app-name {
+  margin: 0 0 0 -10px;
+  padding: 5px;
 }
 
 h5 {
@@ -34,7 +39,7 @@ a:visited {
 }
 
 img {
-  padding: 10px 5px 0px 5px;
+  padding: 9px 6px 8px 5px;
   width: 30px;
 }
 
@@ -50,6 +55,7 @@ img {
 
 .logo-icon {
   width: 35px;
+  margin: 0 0 -7px 0px;
   vertical-align: text-bottom;
 }
 
@@ -68,8 +74,8 @@ img {
   justify-content: space-between;
   padding: 10px 5px;
   float: left;
-  width: 370px;
-  overflow-y: auto;
+  width: 400px;
+  /* overflow-y: auto; */
 }
 
 .flex {
@@ -107,9 +113,29 @@ img {
   opacity: 0.5;
 }
 
+.content {
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.content button {
+  visibility: hidden;
+  color: #000;
+  margin-bottom: 52px;
+}
+
+.content:hover button {
+  visibility: visible;
+  color: #dd1d1d;
+  background-color: #ffffff;
+  border: none;
+}
+
 .flex-container {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto;
   background-color: #ffffff;
   padding: 5px;
 }
@@ -117,8 +143,17 @@ img {
   background-color: rgb(236, 227, 227);
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 30px;
-  padding: 2px;
+  padding: 8px;
   margin: 2px;
-  font-size: 10px;
+  font-size: 15px;
   text-align: center;
+}
+.tooltiptext1 {
+  visibility: hidden;
+  margin: 10px 10px -52px -68px;
+}
+
+.content:hover .tooltiptext1 {
+  color: #000000;
+  visibility: visible;
 }
