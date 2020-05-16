@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // sort or drag functionality
   $(function () {
     $('.flex-container').sortable({
       cursor: 'grabbing',
@@ -11,11 +12,9 @@ $(document).ready(function () {
           localStorage.clear();
 
           stored.push({ name, url });
-
-          // console.log('stored', stored);
         });
+        // saving data after re sort
         localStorage.setItem('data', JSON.stringify(stored));
-        // console.log(localStorage.getItem('data'));
       },
     });
   });
@@ -39,7 +38,6 @@ $(document).ready(function () {
 
   function saveNewData(name, url) {
     let stored = JSON.parse(localStorage.getItem('data'));
-    // console.log(stored);
 
     stored.push({ name: name, url: url });
 
@@ -52,7 +50,7 @@ $(document).ready(function () {
   }
 
   $('.saveBtn').click(function () {
-    const name = $('.name-field').val().toLowerCase();
+    const name = $('.name-field').val();
     const url = $('.url-field').val();
 
     if (localStorage.getItem('data') === null && name && url) {
@@ -66,22 +64,49 @@ $(document).ready(function () {
     } else alert('Enter All Fields Please. 🙂');
   });
 
+  // remove link
+  function removeLink(url) {
+    let oldData = JSON.parse(localStorage.getItem('data'));
+
+    updateData = oldData.filter(el => el.url !== url);
+
+    localStorage.setItem('data', JSON.stringify(updateData));
+
+    $('.flex-container div').each(function () {
+      let divUrl = $(this).attr('url');
+      if (url === divUrl) {
+        $(this).remove();
+      }
+    });
+  }
+
+  $(document).on('click', '.remove-url-btn', function () {
+    const url = $(this).attr('url');
+    removeLink(url);
+  });
+
   function renderNewData() {
     let allData = JSON.parse(localStorage.getItem('data'));
     da = allData[allData.length - 1];
-    // console.log('da', da);
+
     if (da.name !== undefined && da.url !== undefined) {
       const url = getDomain(da.url);
+      let imgUrl = '';
+      if (url === 'github.com') {
+        imgUrl = './icons/github-icon.png';
+      } else {
+        imgUrl = `http://www.google.com/s2/favicons?domain=${url}`;
+      }
       $('.flex-container').append(`
       <div class="content" name="${da.name}" url="${da.url}">
-          <div class="flex draggable">
-            <a href="${da.url}" target="_blank">
-              <img class="fa" src="http://www.google.com/s2/favicons?domain=${url}" alt="${da.name}"/><br>
-            </a>
-          </div>
-            <button class="remove-url-btn" url="${da.url}" title="Remove Link">x</button>
-            <span class="tooltiptext1">${da.name}</span>
+        <div class="flex draggable">
+          <a href="${da.url}" target="_blank">
+            <img class="fa" src="${imgUrl}" alt="${da.name}"/><br>
+          </a>
         </div>
+          <button class="remove-url-btn" url="${da.url}"           title="Remove Link">x</button>
+          <span class="tooltiptext1">${da.name}</span>
+      </div>
         `);
     }
   }
