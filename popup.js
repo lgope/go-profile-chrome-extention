@@ -1,54 +1,65 @@
 $(document).ready(function () {
-  // sort or drag functionality
-  $(function () {
-    $('.flex-container').sortable({
-      cursor: 'grabbing',
-      update: function () {
-        let stored = [];
-        $('.flex-container div').each(function () {
-          let name = $(this).attr('name');
-          let url = $(this).attr('url');
-
-          localStorage.clear();
-
-          stored.push({ name, url });
-        });
-        // saving data after re sort
-        localStorage.setItem('data', JSON.stringify(stored));
-      },
-    });
-  });
-
   // get url domain for get website icon
   function getDomain(url) {
     return url.match(/:\/\/(.[^/]+)/)[1];
   }
 
-  let names = new Array();
-  let urls = new Array();
-  let data = [{}];
-  function saveData(name, url) {
-    names.push(name);
-    urls.push(url);
-
-    data.push({ name: name, url: url });
-
-    localStorage.setItem('data', JSON.stringify(data));
+  // rendering all link/url
+  function renderData(data) {
+    if (data) {
+      data.map(d => {
+        if (d.name !== undefined && d.url !== undefined) {
+          const url = getDomain(d.url);
+          let imgUrl = '';
+          if (url === 'github.com') {
+            imgUrl = './icons/github-icon.png';
+          } else {
+            imgUrl = `http://www.google.com/s2/favicons?domain=${url}`;
+          }
+          $('.flex-container').append(`
+          <div class="content" name="${d.name}" url="${d.url}">
+            <div class="flex draggable">
+              <a href="${d.url}" target="_blank">
+                <img class="fa" src="${imgUrl}" alt="${d.name}"/><br>
+              </a>
+            </div>
+            <button class="remove-url-btn" url="${d.url}" title="Remove Link">x</button>
+            <span class="tooltiptext1">${d.name}</span>
+          </div>
+            `);
+        }
+      });
+    }
   }
 
+  // 1st time saving data to localstorage
+  function saveData(name, url) {
+    let data = [{}];
+    if (name && url) {
+      data.push({ name: name, url: url });
+
+      localStorage.setItem('data', JSON.stringify(data));
+    }
+  }
+
+  // after 1st saving data to localstorage
   function saveNewData(name, url) {
     let stored = JSON.parse(localStorage.getItem('data'));
 
-    stored.push({ name: name, url: url });
+    if (name && url) {
+      stored.push({ name: name, url: url });
 
-    localStorage.setItem('data', JSON.stringify(stored));
+      localStorage.setItem('data', JSON.stringify(stored));
+    }
   }
 
+  // clear input fields after saving name and url
   function clearInputFields() {
     $('.name-field').val('');
     $('.url-field').val('');
   }
 
+  // save button fire after fill up input fields
   $('.saveBtn').click(function () {
     const name = $('.name-field').val();
     const url = $('.url-field').val();
@@ -56,11 +67,11 @@ $(document).ready(function () {
     if (localStorage.getItem('data') === null && name && url) {
       saveData(name, url);
       clearInputFields();
-      renderNewData();
+      renderData([{ name, url }]);
     } else if (name && url) {
       saveNewData(name, url);
       clearInputFields();
-      renderNewData();
+      renderData([{ name, url }]);
     } else alert('Enter All Fields Please. 🙂');
   });
 
@@ -80,34 +91,39 @@ $(document).ready(function () {
     });
   }
 
+  // remove url button fired. Getting url from btn attribute & passing to removeLink method
   $(document).on('click', '.remove-url-btn', function () {
     const url = $(this).attr('url');
     removeLink(url);
   });
 
-  function renderNewData() {
+  // rendering data onload
+  $(function () {
     let allData = JSON.parse(localStorage.getItem('data'));
-    da = allData[allData.length - 1];
-
-    if (da.name !== undefined && da.url !== undefined) {
-      const url = getDomain(da.url);
-      let imgUrl = '';
-      if (url === 'github.com') {
-        imgUrl = './icons/github-icon.png';
-      } else {
-        imgUrl = `http://www.google.com/s2/favicons?domain=${url}`;
-      }
-      $('.flex-container').append(`
-      <div class="content" name="${da.name}" url="${da.url}">
-        <div class="flex draggable">
-          <a href="${da.url}" target="_blank">
-            <img class="fa" src="${imgUrl}" alt="${da.name}"/><br>
-          </a>
-        </div>
-          <button class="remove-url-btn" url="${da.url}"           title="Remove Link">x</button>
-          <span class="tooltiptext1">${da.name}</span>
-      </div>
-        `);
+    if (allData) {
+      renderData(allData);
     }
-  }
+  });
+
+  // sort or drag functionality
+  $(function () {
+    $('.flex-container').sortable({
+      cursor: 'grabbing',
+      update: function () {
+        let stored = [];
+        $('.flex-container div').each(function () {
+          let name = $(this).attr('name');
+          let url = $(this).attr('url');
+
+          localStorage.clear();
+          // empty value not saving at localStorage
+          if (name && url) {
+            stored.push({ name, url });
+          }
+        });
+        // saving data after re sort
+        localStorage.setItem('data', JSON.stringify(stored));
+      },
+    });
+  });
 });
