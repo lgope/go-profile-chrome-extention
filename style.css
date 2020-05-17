@@ -8,7 +8,6 @@ body {
   min-height: 160px;
   padding: 0;
   width: 400px;
-  /* border-top: 0.5px solid #201818; */
 }
 
 .logo-name {
@@ -33,9 +32,7 @@ h5 {
 
 a:link,
 a:visited {
-  color: #000000;
   outline: 0;
-  text-decoration: none;
 }
 
 img {
@@ -64,18 +61,12 @@ img {
   font-size: 12px;
 }
 
-.name-list {
-  max-width: 110px;
-  word-wrap: break-word;
-}
-
 .flex-container {
   display: -webkit-box;
   justify-content: space-between;
   padding: 10px 5px;
   float: left;
   width: 400px;
-  /* overflow-y: auto; */
 }
 
 .flex {
@@ -100,15 +91,6 @@ img {
   border: none;
 }
 
-.flex span {
-  visibility: hidden;
-}
-
-.flex:hover span {
-  color: #000000;
-  visibility: visible;
-}
-
 .info-btn {
   opacity: 0.5;
 }
@@ -122,6 +104,7 @@ img {
 
 .content button {
   visibility: hidden;
+  border: none;
   color: #000;
   margin-bottom: 52px;
 }
@@ -129,7 +112,7 @@ img {
 .content:hover button {
   visibility: visible;
   color: #dd1d1d;
-  background-color: #ffffff;
+  background-color: #fff;
   border: none;
 }
 
@@ -149,11 +132,6 @@ img {
   text-align: center;
 }
 .tooltiptext1 {
-  visibility: hidden;
-  margin: 10px 10px -52px -68px;
-}
-
-.content:hover .tooltiptext1 {
-  color: #000000;
-  visibility: visible;
+  color: #5d3592;
+  margin: 10px 10px -60px -66px;
 }

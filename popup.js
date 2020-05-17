@@ -13,18 +13,26 @@ $(document).ready(function () {
           let imgUrl = '';
           if (url === 'github.com') {
             imgUrl = './icons/github-icon.png';
+          } else if (url === 'stackexchange.com') {
+            imgUrl = './icons/stackexchange.png';
           } else {
             imgUrl = `http://www.google.com/s2/favicons?domain=${url}`;
           }
           $('.flex-container').append(`
-          <div class="content" name="${d.name}" url="${d.url}">
+          <div class="content" name="${d.name}" url="${d.url}" title="${
+            d.name
+          }">
             <div class="flex draggable">
               <a href="${d.url}" target="_blank">
                 <img class="fa" src="${imgUrl}" alt="${d.name}"/><br>
               </a>
             </div>
-            <button class="remove-url-btn" url="${d.url}" title="Remove Link">x</button>
-            <span class="tooltiptext1">${d.name}</span>
+            <button class="remove-url-btn" url="${
+              d.url
+            }" title="Remove Link">x</button>
+            <span class="tooltiptext1">${
+              d.name.length > 10 ? d.name.slice(0, 9) + '...' : d.name
+            }</span>
           </div>
             `);
         }
@@ -109,6 +117,11 @@ $(document).ready(function () {
   $(function () {
     $('.flex-container').sortable({
       cursor: 'grabbing',
+      tolerance: 'pointer',
+      distance: 15,
+      scrollSensitivity: 20,
+      scroll: false,
+      revert: true,
       update: function () {
         let stored = [];
         $('.flex-container div').each(function () {
