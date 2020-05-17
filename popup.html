@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Link saver for easy move">
+    <meta name="keywords" content="HTML, CSS, Jquery">
+    <meta name="author" content="Lakshman Gope">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Go Profile</title>
@@ -26,6 +29,7 @@
 
 <body>
     <div>
+        <!-- app logo, name, url input fields -->
         <div class="logo-name">
             <h4 class="logo">
                 <img class="logo-icon" src="images/profil-logo.png" />
@@ -33,9 +37,9 @@
             </h4>
             <div class="data-input-fields">
                 <p>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                        aria-expanded="false" aria-controls="collapseExample">
-                        Add Profile Link
+                    <button class="inputFields-toggler btn btn-primary" type="button" data-toggle="collapse"
+                        data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Add URL
                     </button>
                     <button class="btn btn-info info-btn" type="button" data-toggle="collapse"
                         data-target="#collapseExampleFooter" aria-expanded="false"
@@ -43,7 +47,9 @@
                         ?
                     </button>
                 </p>
-                <div class="inputFields collapse" id="collapseExample" data-toggle="inputFields">
+
+                <!-- name, url input fields -->
+                <div class="collapse inputFields" id="collapseExample" data-toggle="inputFields">
 
                     <div class="input-group input-group-sm mb-3 inputs">
                         <div class="input-group-prepend">
@@ -57,7 +63,8 @@
                                 <span class="input-group-text" id="inputGroup-sizing-sm">URL</span>
                             </div>
                             <input type="text" class="form-control url-field" aria-label="Small"
-                                aria-describedby="inputGroup-sizing-sm" placeholder="https://www.facebook.com" required>
+                                aria-describedby="inputGroup-sizing-sm" placeholder="https://www.facebook.com/...."
+                                required>
                         </div>
                     </div>
                     <button class="btn btn-secondary" type="button" data-toggle="collapse"
@@ -67,6 +74,7 @@
                     <button type="button" class="btn btn-success saveBtn">Save changes</button>
                 </div>
 
+                <!-- footer field create -->
                 <div class="footerField">
                     <div class="footerFields collapse" id="collapseExampleFooter" data-toggle="footerFields">
                         <span class="version txt-dark">(1.0.0)</span>
