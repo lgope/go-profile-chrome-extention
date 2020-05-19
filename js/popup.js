@@ -1,7 +1,13 @@
 $(document).ready(function () {
   // get url domain for get website icon
   function getDomain(url) {
-    return url.match(/:\/\/(.[^/]+)/)[1];
+    let domain = url.match(/:\/\/(.[^/]+)/);
+
+    if (domain) {
+      return url.match(/:\/\/(.[^/]+)/)[1];
+    } else {
+      return 0;
+    }
   }
 
   // rendering all link/url
@@ -67,20 +73,47 @@ $(document).ready(function () {
     $('.url-field').val('');
   }
 
+  // show log message
+  function showLog(msg, ms) {
+    $('.message-log').empty();
+    $('.message-log').append(`${msg}`);
+    setTimeout(() => {
+      $('.message-log').empty();
+    }, ms);
+  }
+
   // save button fire after fill up input fields
   $('.saveBtn').click(function () {
     const name = $('.name-field').val();
     const url = $('.url-field').val();
 
+    // checking name & url
+    if (!name || !url) {
+      showLog('Enter All Fields Please. 🙂', 4000);
+      return;
+    }
+
+    // checking valid url
+    if (!getDomain(url)) {
+      showLog('Please enter valid URL!', 5000);
+      return;
+    }
+
     if (localStorage.getItem('data') === null && name && url) {
       saveData(name, url);
       clearInputFields();
       renderData([{ name, url }]);
+
+      // showing added messeage
+      showLog('<p class="text-success">URL Added 🎉</p>', 2000);
     } else if (name && url) {
       saveNewData(name, url);
       clearInputFields();
       renderData([{ name, url }]);
-    } else alert('Enter All Fields Please. 🙂');
+
+      // showing added messeage
+      showLog('<p class="text-success">URL Added 🎉</p>', 2000);
+    }
   });
 
   // remove link
