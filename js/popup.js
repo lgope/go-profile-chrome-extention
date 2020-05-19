@@ -12,9 +12,9 @@ $(document).ready(function () {
           const url = getDomain(d.url);
           let imgUrl = '';
           if (url === 'github.com') {
-            imgUrl = './icons/github-icon.png';
+            imgUrl = '/images/icons/github-icon.png';
           } else if (url === 'stackexchange.com') {
-            imgUrl = './icons/stackexchange.png';
+            imgUrl = '/images/icons/stackexchange.png';
           } else {
             imgUrl = `http://www.google.com/s2/favicons?domain=${url}`;
           }
@@ -118,8 +118,7 @@ $(document).ready(function () {
     $('.flex-container').sortable({
       cursor: 'grabbing',
       tolerance: 'pointer',
-      distance: 15,
-      scrollSensitivity: 20,
+      distance: 25,
       scroll: false,
       revert: true,
       update: function () {
