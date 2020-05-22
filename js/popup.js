@@ -12,10 +12,9 @@ $(document).ready(function () {
 
   // rendering all link/url
   function renderData(data) {
-    console.log('data', data);
     if (data) {
       data.map(d => {
-        if (d.name !== undefined && d.url !== undefined) {
+        if (d.id !== null && d.name !== null && d.url !== null) {
           const url = getDomain(d.url);
           let imgUrl = '';
           if (url === 'github.com') {
