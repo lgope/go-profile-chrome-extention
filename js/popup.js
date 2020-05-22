@@ -14,7 +14,7 @@ $(document).ready(function () {
   function renderData(data) {
     if (data) {
       data.map(d => {
-        if (d.name !== undefined && d.url !== undefined) {
+        if (d.id !== null && d.name !== null && d.url !== null) {
           const url = getDomain(d.url);
           let imgUrl = '';
           if (url === 'github.com') {
@@ -25,16 +25,16 @@ $(document).ready(function () {
             imgUrl = `http://www.google.com/s2/favicons?domain=${url}`;
           }
           $('.flex-container').append(`
-          <div class="content" name="${d.name}" url="${d.url}" title="${
-            d.name
-          }">
+          <div class="content" id="${d.id}" name="${d.name}" url="${
+            d.url
+          }" title="${d.name}">
             <div class="flex draggable">
               <a href="${d.url}" target="_blank">
                 <img class="fa" src="${imgUrl}" alt="${d.name}"/><br>
               </a>
             </div>
-            <button class="remove-url-btn" url="${
-              d.url
+            <button class="remove-url-btn" id="${
+              d.id
             }" title="Remove Link">x</button>
             <span class="tooltiptext1">${
               d.name.length > 10 ? d.name.slice(0, 9) + '...' : d.name
@@ -46,11 +46,24 @@ $(document).ready(function () {
     }
   }
 
+  // random id generate
+  const objectId = function () {
+    const timestamp = ((new Date().getTime() / 1000) | 0).toString(16);
+    return (
+      timestamp +
+      'bbbbbbbbbbbbbbbb'
+        .replace(/[b]/g, function () {
+          return ((Math.random() * 16) | 0).toString(16);
+        })
+        .toLowerCase()
+    );
+  };
+
   // 1st time saving data to localstorage
   function saveData(name, url) {
-    let data = [{}];
+    let data = [];
     if (name && url) {
-      data.push({ name: name, url: url });
+      data.push({ id: objectId(), name: name, url: url });
 
       localStorage.setItem('data', JSON.stringify(data));
     }
@@ -61,7 +74,7 @@ $(document).ready(function () {
     let stored = JSON.parse(localStorage.getItem('data'));
 
     if (name && url) {
-      stored.push({ name: name, url: url });
+      stored.push({ id: objectId(), name: name, url: url });
 
       localStorage.setItem('data', JSON.stringify(stored));
     }
@@ -109,7 +122,7 @@ $(document).ready(function () {
     } else if (name && url) {
       saveNewData(name, url);
       clearInputFields();
-      renderData([{ name, url }]);
+      renderData([{ id: objectId(), name: name, url: url }]);
 
       // showing added messeage
       showLog('<p class="text-success">URL Added 🎉</p>', 2000);
@@ -117,16 +130,16 @@ $(document).ready(function () {
   });
 
   // remove link
-  function removeLink(url) {
+  function removeLink(id) {
     let oldData = JSON.parse(localStorage.getItem('data'));
 
-    updateData = oldData.filter(el => el.url !== url);
+    updateData = oldData.filter(el => el.id !== id);
 
     localStorage.setItem('data', JSON.stringify(updateData));
 
     $('.flex-container div').each(function () {
-      let divUrl = $(this).attr('url');
-      if (url === divUrl) {
+      let divId = $(this).attr('id');
+      if (id === divId) {
         $(this).remove();
       }
     });
@@ -134,8 +147,8 @@ $(document).ready(function () {
 
   // remove url button fired. Getting url from btn attribute & passing to removeLink method
   $(document).on('click', '.remove-url-btn', function () {
-    const url = $(this).attr('url');
-    removeLink(url);
+    const id = $(this).attr('id');
+    removeLink(id);
   });
 
   // rendering data onload
@@ -157,13 +170,14 @@ $(document).ready(function () {
       update: function () {
         let stored = [];
         $('.flex-container div').each(function () {
-          let name = $(this).attr('name');
-          let url = $(this).attr('url');
+          const id = $(this).attr('id');
+          const name = $(this).attr('name');
+          const url = $(this).attr('url');
 
           localStorage.clear();
           // empty value not saving at localStorage
-          if (name && url) {
-            stored.push({ name, url });
+          if (id && name && url) {
+            stored.push({ id, name, url });
           }
         });
         // saving data after re sort
