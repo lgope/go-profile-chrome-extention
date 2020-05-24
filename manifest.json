@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Go Profile",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "This app helps to save any profile link or website link for an easy move",
     "icons": {
         "16": "images/icons/icon_16.png",
