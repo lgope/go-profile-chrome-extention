@@ -37,7 +37,7 @@ $(document).ready(function () {
               d.id
             }" title="Remove Link">x</button>
             <span class="tooltiptext1">${
-              d.name.length > 10 ? d.name.slice(0, 9) + '...' : d.name
+              d.name.length > 10 ? d.name.slice(0, 7) + '...' : d.name
             }</span>
           </div>
             `);
@@ -59,22 +59,12 @@ $(document).ready(function () {
     );
   };
 
-  // 1st time saving data to localstorage
-  function saveData(name, url) {
-    let data = [];
-    if (name && url) {
-      data.push({ id: objectId(), name: name, url: url });
-
-      localStorage.setItem('data', JSON.stringify(data));
-    }
-  }
-
-  // after 1st saving data to localstorage
-  function saveNewData(name, url) {
+  // Save data to localstorage
+  function saveNewData(id, name, url) {
     let stored = JSON.parse(localStorage.getItem('data'));
 
-    if (name && url) {
-      stored.push({ id: objectId(), name: name, url: url });
+    if (id && name && url) {
+      stored.push({ id: id, name: name, url: url });
 
       localStorage.setItem('data', JSON.stringify(stored));
     }
@@ -99,30 +89,23 @@ $(document).ready(function () {
   $('.saveBtn').click(function () {
     const name = $('.name-field').val();
     const url = $('.url-field').val();
+    const id = objectId();
 
     // checking name & url
     if (!name || !url) {
-      showLog('Enter All Fields Please. 🙂', 4000);
-      return;
+      return showLog('Enter All Fields Please. 🙂', 4000);
     }
 
     // checking valid url
     if (!getDomain(url)) {
-      showLog('Please enter valid URL!', 5000);
-      return;
+      return showLog('Please enter valid URL!', 5000);
     }
 
-    if (localStorage.getItem('data') === null && name && url) {
-      saveData(name, url);
+    // check values and save
+    if (id && name && url) {
+      saveNewData(id, name, url);
       clearInputFields();
-      renderData([{ name, url }]);
-
-      // showing added messeage
-      showLog('<p class="text-success">URL Added 🎉</p>', 2000);
-    } else if (name && url) {
-      saveNewData(name, url);
-      clearInputFields();
-      renderData([{ id: objectId(), name: name, url: url }]);
+      renderData([{ id: id, name: name, url: url }]);
 
       // showing added messeage
       showLog('<p class="text-success">URL Added 🎉</p>', 2000);
@@ -174,12 +157,12 @@ $(document).ready(function () {
           const name = $(this).attr('name');
           const url = $(this).attr('url');
 
-          localStorage.clear();
           // empty value not saving at localStorage
           if (id && name && url) {
             stored.push({ id, name, url });
           }
         });
+
         // saving data after re sort
         localStorage.setItem('data', JSON.stringify(stored));
       },
