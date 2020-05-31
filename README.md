@@ -44,4 +44,4 @@ and feel free to share your opinion, constructive criticism, or comments about m
 
 ## Deployed Version
 
-Feel free to visit 👉
+Feel free to visit 👉 [Chrome Web Store](https://chrome.google.com/webstore/detail/go-profile/fdmejlnlgblffjdjokhamfplblbfjloh/related?hl=en)
