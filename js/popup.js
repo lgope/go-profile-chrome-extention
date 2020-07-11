@@ -61,7 +61,7 @@ $(document).ready(function () {
 
   // Save data to localstorage
   function saveNewData(id, name, url) {
-    let stored = JSON.parse(localStorage.getItem('data'));
+    let stored = JSON.parse(localStorage.getItem('data')) || [];
 
     if (id && name && url) {
       stored.push({ id: id, name: name, url: url });
